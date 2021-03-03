@@ -24,7 +24,8 @@
 			<div class="slides">
 				<section>
 					<h2>Pseudoalignment</h2>
-					<p>Bastian Schiffthaler</p>
+					<p>and also regular old alignment</p>
+					<p>Bastian Schiffthaler, Nicolas Delhomme</p>
 				</section>
 				<section>
 					<h2>Pseudoalignment vs. Traditional Alignment</h2>
@@ -135,6 +136,76 @@
 					<section data-background="white">
 						<h3>Salmon bias corrections</h3>
 						<img class="stretch" data-src="img/bias.png">
+						<p style="font-size: 16px;"><a href="https://mikelove.wordpress.com/2016/09/26/rna-seq-fragment-sequence-bias/">https://mikelove.wordpress.com/2016/09/26/rna-seq-fragment-sequence-bias/</a></p>
+					</section>
+					<section data-background="white">
+						<h3>Salmon selective alignment (old PoC)</h3>
+						<img class="stretch" data-src="img/sa.jpg">
+						<p>Select most likely transcript among a set of candidates</p>
+						<p style="font-size: 16px;"><a href="https://www.biorxiv.org/content/10.1101/138800v2">https://www.biorxiv.org/content/10.1101/138800v2</a></p>
+					</section>
+					<section>
+						<h3>Salmon decoy-aware transcriptomes</h3>
+						<blockquote>
+							Experimental datasets are generally more complex and include reads that originate from segments that are not part of the annotated transcripts.
+						</blockquote>
+						<ul>
+							<li>Requires availability of genome sequence</li>
+							<li>Avoids spurious mappings of genomic sequences with high similarity to transcripts</li>
+							<ul>
+								<li>Introns</li>
+								<li>Intergenic sequences</li>
+								<li>Unannotated transcripts</li>
+							</ul>
+						</ul>
+						<p style="font-size: 16px;"><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02151-8#Sec21">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02151-8#Sec21</a></p>
+					</section>
+					<section>
+						<h3>Parameters?</h3>
+						<ul>
+							<li>Bias: all-on, unless you suspect non-traditional sequences in your organism</li>
+							<li>K: default, unless you map to a relative -> sensitivity/specificity</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>When to choose what</h3>
+						<ul>
+							<li>Traditional (STAR)</li>
+							<ul>
+								<li>Novel gene discovery</li>
+								<li>RNA-Seq variant discovery</li>
+								<li>Cancer -> StarFusion</li>
+							</ul>
+							<br>
+							<li>Pseudo (Salmon)</li>
+							<ul>
+								<li>Quantification of known transcripts</li>
+								<li>High speed, high accuracy</li>
+								<li>No interest in variants</li>
+								<li>No interest in discovering novel genes</li>
+							</ul>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Practical</h3>
+						<ul>
+							<li>Build a (non-decoy-aware) salmon index.</li>
+							<li>Quantify one library</li>
+						</ul>
+						<p>Some hints:</p>
+						<pre>
+							<code class="bash">#!/usr/bin/env bash
+salmon index --help
+salmon quant --help-reads
+TRANSCRIPTS=~/raw_data/reference/Pabies1.0-all.phase.gff3.CDS.fa
+SEQDATADIR=~/raw_data/trimmomatic
+							</code>
+						</pre>
+						<p><a href="https://gist.github.com/bschiffthaler/4b615c720a32e1edbbc7c5173e4c4592">Tutorial!</a></p>
 					</section>
 				</section>
 			</div>
