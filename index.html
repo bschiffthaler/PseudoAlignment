@@ -114,6 +114,49 @@
 							<li>STAR: various parameters related to memory consumption</li>
 						</ul>
 					</section>
+					<section>
+						<table style="font-size: 24px;">
+							<h3>The SAM format</h3>
+							<thead>
+								<tr><th>Col</th><th>Name</th><th>Description</th></tr>
+							</thead>
+							<tbody>
+								<tr><td>1</td><td>QNAME</td><td>Query template name</td></tr>
+								<tr><td>2</td><td>FLAG</td><td>Bitwise flag</td></tr>
+								<tr><td>3</td><td>RNAME</td><td>Reference sequence name</td></tr>
+								<tr><td>4</td><td>POS</td><td>1-based leftmost mapping position</td></tr>
+								<tr><td>5</td><td>MAPQ</td><td>Mapping quality</td></tr>
+								<tr><td>6</td><td>CIGAR</td><td>CIGAR string</td></tr>
+								<tr><td>7</td><td>RNEXT</td><td>Reference name of mate</td></tr>
+								<tr><td>8</td><td>PNEXT</td><td>Poisition of the mate</td></tr>
+								<tr><td>9</td><td>TLEN</td><td>Observed template length</td></tr>
+								<tr><td>10</td><td>SEQ</td><td>Segment sequence</td></tr>
+								<tr><td>11</td><td>QUAL</td><td>Sequence PHRED quality</td></tr>
+								<tr><td>12+</td><td></td><td>Additional data: TAG:TYPE:VALUE</td></tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>A SAM record</h3>
+						<pre><code>samtools view &lt;Alignment SAM/BAM/CRAM&gt;</code></pre>
+						<pre style="font-size: 18px;"><code class="plaintext">FCC1L3GACXX:1:1308:5586:93026#  
+99      
+Potra000013     
+27834   
+254     
+100M
+=       
+27953   
+219     
+CCCCGTTAGTACCATTTGAGTTCTCAACAGCCTGCTCCTGCTCCAATTTTCTCTTCTCCTTTTTCTTCTTCTTCTCTGATTTAGCATCCTCTGAAGCACC    
+@@CFFDDFHDHFHGHHIIGIIIEGHIHGGIGII@HEHIIIGGII9?FGHIIIGGIGIIIGGGIIIIIIIIIIIIIHICHFEHEHFFFFFCEECCEEDDDD    
+NH:i:1  
+HI:i:1  
+AS:i:196        
+nM:i:1  
+MD:Z:100        
+NM:i:0</code></pre>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -166,6 +209,30 @@
 							<li>Bias: all-on, unless you suspect non-traditional sequences in your organism</li>
 							<li>K: default, unless you map to a relative -> sensitivity/specificity</li>
 						</ul>
+					</section>
+				</section>
+				<section>
+					<section data-background="white">
+						<h3>Bootstrapping/Gibbs sampling and Estimating Confidence</h3>
+						<img class="stretch" src="img/bootstrap.png">
+						<p>Salmon re-samples counts in equivalence classes to estimate uncertainty in abundance estimation</p>
+					</section>
+					<section>
+						<h3>Applications</h3>
+						<div style="display: flex;">
+							<p style="flex: 1; text-align: left;"><a href="https://github.com/COMBINE-lab/Terminus">Terminus</a> can collapse transcripts that
+							have too much uncertainty in the abundance estimation into a group for which the abundance can be estimated accurately.<br><br>
+						  The group is analyzed as a unit.</p>
+							<img style="flex: 1; max-width: 400px;" src="img/terminus.jpg">
+						</div>
+					</section>
+					<section>
+						<h3>Applications</h3>
+						<div>
+							<p><a href="https://bioconductor.org/packages/fishpond">Fishpond</a> uses uncertainty estimates
+							for differential transcript and gene expression.</p>
+							<img style="max-width: 400px;" data-src="https://mikelove.github.io/assets/fishpond.png">
+						</div>
 					</section>
 				</section>
 				<section>
